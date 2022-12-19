@@ -1,11 +1,17 @@
-//Stateless variable
+//Statefull variable
+//we import useState function from react library
+import { useState } from "react";
+
 function App() {
-  let counter = 100;
+  //initialized counter value=10
+  let [counter, setCounter] = useState(10);
 
   //Arrow of function
   let increment = () => {
     counter = counter + 1;
-    console.log(counter);
+
+    //RE-RENDER,means set the updated value of counter by using setCounter
+    setCounter(counter);
   };
 
   return (
@@ -20,5 +26,5 @@ function App() {
 
 export default App;
 
-//in this function we incremented value by using varibale value but this variable is stateless beacuse of
-//by using this varibale we cant update value on web window,we update value only in console window(inspect)
+//in this function we incremented value by using varibale value but this variable is statefull beacuse of
+//by using this varibale we can update value on web window
