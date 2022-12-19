@@ -1,25 +1,24 @@
+//Stateless variable
 function App() {
-  //local data memebers
-  let project = "Counter Application";
-  let btnvalue = "Click Mee";
+  let counter = 100;
 
-  //Member Function :: Types of functions
-  //arrow of function
-  let clickMe = () => alert();
-  let increment = () => {};
-  let decrement = () => {};
+  //Arrow of function
+  let increment = () => {
+    counter = counter + 1;
+    console.log(counter);
+  };
 
-  //JSX
   return (
     <div>
-      <h1>{project}</h1>
-      <h1></h1>
-      <input type="button" value={btnvalue} onClick={clickMe} />
+      <h1>Counter Application</h1>
+      <h1>{counter}</h1>
+
       <input type="button" value="Increment" onClick={increment} />
     </div>
   );
 }
 
-//we have created one alert message by using datamember and member functions
-
 export default App;
+
+//in this function we incremented value by using varibale value but this variable is stateless beacuse of
+//by using this varibale we cant update value on web window,we update value only in console window(inspect)
