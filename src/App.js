@@ -1,16 +1,25 @@
-//USER DEFINED TAGS==COMPONENT
 function App() {
-  let project = "Counter Application"; //local variables
+  //local data memebers
+  let project = "Counter Application";
   let btnvalue = "Click Mee";
 
-  //JSX => HTML CSS
-  //one simple button is created by using local/stateless variable
+  //Member Function :: Types of functions
+  //arrow of function
+  let clickMe = () => alert();
+  let increment = () => {};
+  let decrement = () => {};
+
+  //JSX
   return (
     <div>
       <h1>{project}</h1>
-      <input type="button" value={btnvalue} />
+      <h1></h1>
+      <input type="button" value={btnvalue} onClick={clickMe} />
+      <input type="button" value="Increment" onClick={increment} />
     </div>
   );
 }
+
+//we have created one alert message by using datamember and member functions
 
 export default App;
