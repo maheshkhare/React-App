@@ -3,22 +3,40 @@
 import { useState } from "react";
 
 function App() {
-  //initialized counter value=10
-  let [counter, setCounter] = useState(10);
+  let str1 = "Home";
+  let str2 = "Explore";
+  let str3 = "Notifications";
+  //let set[initilize] the counter value=1
+  let [counter, setCounter] = useState(1);
+  //initilize city=mulbai
+  let [city, SetCity] = useState("mumbai");
 
   //Arrow of function
   let increment = () => {
-    counter = counter + 1;
+    // giving logic
+    counter++;
 
-    //RE-RENDER,means set the updated value of counter by using setCounter
+    //DOM UPDATE PART >>RE_RANDRERING
     setCounter(counter);
+  };
+
+  //Arrow of function
+  let changeCity = () => {
+    city = "Hello " + city;
+
+    //re-rendering the value of city
+    SetCity(city);
   };
 
   return (
     <div>
-      <h1>Counter Application</h1>
+      <h1>{city}</h1>
+      <input type="button" value="Change City" onClick={changeCity} />
+      <hr />
+      <h1>{str1}</h1>
+      <h1>{str2}</h1>
+      <h1>{str3}</h1>
       <h1>{counter}</h1>
-
       <input type="button" value="Increment" onClick={increment} />
     </div>
   );
@@ -26,5 +44,6 @@ function App() {
 
 export default App;
 
-//in this function we incremented value by using varibale value but this variable is statefull beacuse of
-//by using this varibale we can update value on web window
+//by using the stateful[useState] variable we can change the values of variables
+//like in twiter,facebbok,whatsapp there is some stable and some unstable options are there
+//
