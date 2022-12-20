@@ -1,35 +1,21 @@
-import { useState } from "react";
+import "./App.css";
 
 function App() {
-  let title = "Map Demo";
-  //initialize list=empty list
-  let [list, setList] = useState([]); //stateful variable
-
-  //member function
-  let addItem = () => {
-    let textRef = document.querySelector("#textId1");
-
-    let newList = [textRef.value, ...list];
-
-    //dom part,set all updated data in list
-    setList(newList);
-
-    textRef.value = ""; //after adding value to the list do empty to the textbox
-  };
-
+  let mystyle = { color: "white", background: "purple" };
   return (
     <div>
-      <h1>{title}</h1>
-      <input type="text" name="" id="textId1" />
-      <input type="button" value="Add Item into List" onClick={addItem} />
-      {/* after clicking on button call given to the function  */}
+      {/* This kind of External Styling */}
+      <h1 className="beautify">Hello Again!</h1>
 
-      {list.map((item) => (
-        <h1>{item}</h1>
-      ))}
-      {/* printing one/one ele. from the */}
+      {/* This kind of internal Styling NOTE:ONLY ONE CURLY BRACES */}
+      <h1 style={mystyle}>Hello Mahi</h1>
+
+      {/* THIS IS INLINE STYLING */}
+      <h1 style={{ color: "white", backgroundColor: "red" }}>Hello</h1>
     </div>
   );
 }
 
 export default App;
+
+//it that project we have seen 3 types of stylings
