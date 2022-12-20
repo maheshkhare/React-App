@@ -1,27 +1,12 @@
 import { useState } from "react";
 
 function App() {
-  // initialized default theme = primary
   let [theme, setTheme] = useState("primary"); //data member
 
   // member Function's
-  let makePrimaryTheme = () => {
-    // this is bootstrap properties
-    theme = "primary";
-
-    // RE-RANDRING
-    setTheme(theme);
-  };
-
-  let makeSuccessTheme = () => {
-    theme = "success";
-
-    // RE-RANDRING
-    setTheme(theme);
-  };
-
-  let makeDangerTheme = () => {
-    theme = "danger";
+  // this is boot strap properties
+  let updateTheme = (p1 = "primary") => {
+    theme = p1;
 
     // RE-RANDRING
     setTheme(theme);
@@ -29,30 +14,37 @@ function App() {
 
   return (
     <div>
-      {/* after clicking on button result set in below this datamemer and it is applied on string */}
-      {/* by-default theme we have declared as primary */}
-      <h1 className={`bg-${theme} text-light p-3`}>Bootstrap Styling</h1>
+      <div className="sticky-top">
+        {/* after clicking on button theme will apply here */}
+        <h1 className={`bg-${theme} text-light p-3`}>
+          Bootstrap Styling {theme}
+          {/* last theme will will provide the theme name infront of string */}
+        </h1>
 
-      <input
-        type="button"
-        value="primary Theme"
-        className="btn btn-primary"
-        onClick={makePrimaryTheme}
-      />
+        <input
+          type="button"
+          value="primary Theme"
+          className="btn btn-primary"
+          // onClick = {updateTheme}
+          onClick={() => updateTheme("primary")}
+        />
 
-      <input
-        type="button"
-        value="success Theme"
-        className="btn btn-success"
-        onClick={makeSuccessTheme}
-      />
+        <input
+          type="button"
+          value="success Theme"
+          className="btn btn-success"
+          // onClick = {updateTheme}
+          onClick={() => updateTheme("success")}
+        />
 
-      <input
-        type="button"
-        value="Danger Theme"
-        className="btn btn-danger"
-        onClick={makeDangerTheme}
-      />
+        <input
+          type="button"
+          value="Danger Theme"
+          className="btn btn-danger"
+          // onClick = {updateTheme}
+          onClick={() => updateTheme("danger")}
+        />
+      </div>
     </div>
   );
 }
