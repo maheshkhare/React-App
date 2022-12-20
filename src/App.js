@@ -1,54 +1,78 @@
+import { useState } from "react";
+
 function App() {
-  // no argument function
-  let clickMe1 = () => {
-    console.log("Hello"); //print hello every time
+  // we have stored 9 elements in list
+  let [list] = useState([1, 1, 1, 1, 1, 1, 1, 1, 1]);
+  // initialized default theme = primary,stateful variable
+  let [theme, setTheme] = useState("primary"); //data member
+
+  // member Function's
+  let makePrimaryTheme = () => {
+    // this is bootstrap properties
+    theme = "primary";
+
+    // RE-RANDRING
+    setTheme(theme);
   };
 
-  // argument function, e is a parameter
-  let clickMe2 = (e) => {
-    console.log(e); //it print one default parameter
+  let makeSuccessTheme = () => {
+    theme = "success";
+
+    // RE-RANDRING
+    setTheme(theme);
   };
 
-  // custom parameter :: using arrow fn
-  let clickMe3 = (p1) => {
-    console.log(p1); //print passed param like primary or danger
-  };
+  let makeDangerTheme = () => {
+    theme = "danger";
 
-  // multiple argument[parameter] function
-  let clickMe4 = (e, p1) => {
-    console.log(e, p1);
+    // RE-RANDRING
+    setTheme(theme);
   };
 
   return (
     <div>
-      <h1>Btn Click Demo</h1>
+      <div className="sticky-top">
+        {/* after clicking on button theme will apply here */}
+        <h1 className={`bg-${theme} text-light p-3`}>
+          Bootstrap Styling {theme}
+          {/* last theme will will provide the theme name infront of string */}
+        </h1>
 
-      {/* Default no parameter call */}
-      <input type="button" value="Click Me 1" onClick={clickMe1} />
+        <input
+          type="button"
+          value="primary Theme"
+          className="btn btn-primary"
+          onClick={makePrimaryTheme}
+        />
 
-      {/* Default event param call,means not given but received there */}
-      <input type="button" value="Click Me 2" onClick={clickMe2} />
+        <input
+          type="button"
+          value="success Theme"
+          className="btn btn-success"
+          onClick={makeSuccessTheme}
+        />
 
-      {/* Custom param call */}
-      <input
-        type="button"
-        value="Click Me 3"
-        onClick={() => clickMe3("primary")} //some default value passed
-      />
-      <input
-        type="button"
-        value="Click Me 3"
-        onClick={() => clickMe3("danger")} //some default value passed
-      />
+        <input
+          type="button"
+          value="Danger Theme"
+          className="btn btn-danger"
+          onClick={makeDangerTheme}
+        />
+      </div>
 
-      {/* Event + custom parameter call */}
-      <input
-        type="button"
-        value="Click Me 4"
-        onClick={(e) => clickMe4(e, "ABCDiefwodhh8rgloijewgrEFGH")}
-      />
+      {list.map((item) => (
+        //after clicking on button theme will be apply here,and this will iterate 9 times
+        <div className={`alert alert-${theme} my-1`}>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. A eius,
+          voluptas quo, iusto id commodi optio sed perspiciatis natus minima
+          incidunt reprehenderit quos ratione tempora atque vero aspernatur
+          itaque dicta!
+        </div>
+      ))}
     </div>
   );
 }
 
 export default App;
+
+// bootstrap styling
