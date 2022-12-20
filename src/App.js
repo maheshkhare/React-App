@@ -1,54 +1,54 @@
-import { useState } from "react";
-
 function App() {
-  let [theme, setTheme] = useState("primary"); //data member
+  // no argument function
+  let clickMe1 = () => {
+    console.log("Hello"); //print hello every time
+  };
 
-  // member Function's
-  // this is boot strap properties
-  let updateTheme = (p1 = "primary") => {
-    theme = p1;
+  // argument function, e is a parameter
+  let clickMe2 = (e) => {
+    console.log(e); //it print one default parameter
+  };
 
-    // RE-RANDRING
-    setTheme(theme);
+  // custom parameter :: using arrow fn
+  let clickMe3 = (p1) => {
+    console.log(p1); //print passed param like primary or danger
+  };
+
+  // multiple argument[parameter] function
+  let clickMe4 = (e, p1) => {
+    console.log(e, p1);
   };
 
   return (
     <div>
-      <div className="sticky-top">
-        {/* after clicking on button theme will apply here */}
-        <h1 className={`bg-${theme} text-light p-3`}>
-          Bootstrap Styling {theme}
-          {/* last theme will will provide the theme name infront of string */}
-        </h1>
+      <h1>Btn Click Demo</h1>
 
-        <input
-          type="button"
-          value="primary Theme"
-          className="btn btn-primary"
-          // onClick = {updateTheme}
-          onClick={() => updateTheme("primary")}
-        />
+      {/* Default no parameter call */}
+      <input type="button" value="Click Me 1" onClick={clickMe1} />
 
-        <input
-          type="button"
-          value="success Theme"
-          className="btn btn-success"
-          // onClick = {updateTheme}
-          onClick={() => updateTheme("success")}
-        />
+      {/* Default event param call,means not given but received there */}
+      <input type="button" value="Click Me 2" onClick={clickMe2} />
 
-        <input
-          type="button"
-          value="Danger Theme"
-          className="btn btn-danger"
-          // onClick = {updateTheme}
-          onClick={() => updateTheme("danger")}
-        />
-      </div>
+      {/* Custom param call */}
+      <input
+        type="button"
+        value="Click Me 3"
+        onClick={() => clickMe3("primary")} //some default value passed
+      />
+      <input
+        type="button"
+        value="Click Me 3"
+        onClick={() => clickMe3("danger")} //some default value passed
+      />
+
+      {/* Event + custom parameter call */}
+      <input
+        type="button"
+        value="Click Me 4"
+        onClick={(e) => clickMe4(e, "ABCDiefwodhh8rgloijewgrEFGH")}
+      />
     </div>
   );
 }
 
 export default App;
-
-// bootstrap styling
