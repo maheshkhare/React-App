@@ -1,20 +1,39 @@
-// importing the axios libraries for making Ajax call
+// Storing Hardcoded data to the database
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  // Datamembers
+  //Data Members
   let [title] = useState("API DEMO");
   let [messageList, setMessageList] = useState([]);
 
-  // member fn
+  // Spl fn :: HOOK :: Like Contructor :: called while component is initialized
+  useEffect(() => {
+    getAllMessages();
+  });
+
+  // Member fn
   let getAllMessages = async () => {
     let url = `http://localhost:3001/messages`;
-    let responce = await axios.get(url); //featching url+data by the axios obj
+    let response = await axios.get(url);
 
-    // Getting the Message From Server : And Re-rendering
-    messageList = [...responce.data]; //cloning the all data from backend
+    // Getting the Message From Server :: And re-rendering
+    messageList = [...response.data];
     setMessageList(messageList);
+  };
+
+  let createNewMessage = async () => {
+    let url = `http://localhost:3001/message`;
+
+    let data = {
+      message: "Hello mahi",
+      reply: true,
+    };
+
+    await axios.post(url, data);
+
+    // To refresh the content
+    getAllMessages();
   };
 
   return (
@@ -23,13 +42,18 @@ function App() {
 
       <input
         type="button"
-        value="Make Ajax/API Call"
+        value="Make Ajax/API GET Call"
         onClick={getAllMessages}
       />
 
-      {messageList.map((item) => (
-        <div>{item.message}</div>
-        // message is the element of backend
+      <input
+        type="button"
+        value="Make Ajax/API POST Call"
+        onClick={createNewMessage}
+      />
+
+      {messageList.map((item, index) => (
+        <div key={index}>{item.message}</div>
       ))}
     </div>
   );
