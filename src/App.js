@@ -1,21 +1,19 @@
 // Storing Hardcoded data to the database
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function App() {
   //Data Members
   let [title] = useState("API DEMO");
+  let inputRef = useRef();
   let [message, setMessage] = useState("");
   let [messageList, setMessageList] = useState([]);
 
-  // Spl fn :: HOOK :: Like Contructor :: called while component is initialized
   useEffect(() => {
     getAllMessages();
   }, []);
 
   let handleOnChangeMessage = (e) => {
-    // message=e.target.value;
-    // setMessage(message);//or
     setMessage(e.target.value);
   };
 
@@ -32,6 +30,11 @@ function App() {
   let createNewMessage = async () => {
     let url = `http://localhost:3001/message`;
 
+    if (!inputRef.current.checkValidity()) {
+      alert("Invalid");
+      return;
+    }
+
     let data = {
       message: message,
       reply: true,
@@ -45,6 +48,12 @@ function App() {
     getAllMessages();
   };
 
+  let checkEnterCode = (e) => {
+    if (e.keyCode == 13) {
+      createNewMessage();
+    }
+  };
+
   return (
     <div>
       <h1>{title}</h1>
@@ -52,8 +61,12 @@ function App() {
       <input
         type="text"
         placeholder="Hi...whatsapp...!!"
-        value={message}
+        value={message} //this is for empty the textbox
         onChange={handleOnChangeMessage}
+        onKeyUp={checkEnterCode}
+        ref={inputRef} //document.querySelector() for onkeyup
+        required
+        minLength={2}
       />
 
       <input
