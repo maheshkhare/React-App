@@ -1,111 +1,48 @@
-// Storing Hardcoded data to the database
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
+// Main fn
 function App() {
-  //Data Members
-  let [title] = useState("API DEMO");
-  let inputRef = useRef();
-  let [message, setMessage] = useState("");
-  let [messageList, setMessageList] = useState([]);
-
-  useEffect(() => {
-    getAllMessages();
-  }, []);
-
-  let handleOnChangeMessage = (e) => {
-    setMessage(e.target.value);
-  };
-
-  // Member fn
-  let getAllMessages = async () => {
-    let url = `http://localhost:3001/messages`;
-    let response = await axios.get(url);
-
-    // Getting the Message From Server :: And re-rendering
-    messageList = [...response.data];
-    setMessageList(messageList);
-  };
-
-  let createNewMessage = async () => {
-    let url = `http://localhost:3001/message`;
-
-    if (!inputRef.current.checkValidity()) {
-      alert("Invalid");
-      return;
-    }
-
-    let data = {
-      message: message,
-    };
-
-    await axios.post(url, data);
-
-    setMessage(""); //make empty to textbox
-
-    // To refresh the content
-    getAllMessages();
-  };
-
-  let checkEnterCode = (e) => {
-    if (e.keyCode == 13) {
-      createNewMessage();
-    }
-  };
-
   return (
     <div>
-      <h1 className="bg-dark text-light p-3 sticky-top">{title}</h1>
-      <div className="row justify-content-center">
-        <div className="col-12 col-md-6">
-          <div className="d-flex">
-            <input
-              className="form-control form-control-lg"
-              type="text"
-              placeholder="Hi...whatsapp...!!"
-              value={message} //this is for empty the textbox
-              onChange={handleOnChangeMessage}
-              onKeyUp={checkEnterCode}
-              ref={inputRef} //document.querySelector() for onkeyup
-              required
-              minLength={2}
-            />
+      <AppHeader />
+      <AppBody />
+      <AppBody />
+      <AppFooter />
+    </div>
+  );
+}
 
-            <input
-              className="btn btn-secondary"
-              type="button"
-              value="Add"
-              onClick={() => createNewMessage(false)}
-            />
+// <AppHeader />
+function AppHeader() {
+  return (
+    <div className="bg-dark text-light p-3">
+      <div className="fs-3">Shopping Book</div>
+    </div>
+    // some bootstrap Properties and name
+  );
+}
 
-            <input
-              className="btn btn-secondary"
-              type="button"
-              value="Reply"
-              onClick={() => createNewMessage(true)}
-            />
-          </div>
-        </div>
-      </div>
+function AppBody() {
+  // 8 list elements created
+  let [list] = useState([{}, {}, {}, {}, {}, {}, {}, {}]);
 
-      {messageList.map((item, index) => (
-        <div className="row justify-content-center">
-          <div className="col-12 col-md-6">
-            <div
-              key={index}
-              className={
-                item.reply
-                  ? "d-flex justify-content-end my-1" //if value is true then print at the end we are used ternary op
-                  : "d-flex justify-content-start my-1" //if value is false then print at the end
-              }
-            >
-              <div className="badge text-bg-secondary">
-                {item.message}
-                <span className="ms-4">
-                  {new Date(item.messageTime).getHours()};
-                  {new Date(item.messageTime).getMinutes()};
-                </span>
-              </div>
+  return (
+    <div className="row">
+      {list.map((item, index) => (
+        //8 times below elements are print on the screen
+
+        <div key={index} className="col-12 col-md-3 my-2">
+          <div className="card">
+            <img
+              src={`http://picsum.photos/${250 + index}`}
+              style={{ height: "200px", objectFit: "cover" }}
+            />
+            <div className="card-header">Card Title</div>
+            <div className="card-body">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione,
+              eius sint facilis debitis suscipit distinctio dicta a, itaque ea
+              dolor soluta aperiam quasi quaerat voluptatibus totam accusantium
+              incidunt pariatur id!
             </div>
           </div>
         </div>
@@ -114,4 +51,16 @@ function App() {
   );
 }
 
+function AppFooter() {
+  return (
+    <div
+      className="bg-secondary d-flex flex-column justify-content-center align-items-center"
+      style={{ height: "400px" }}
+    >
+      <div className="text-light fs-4">Copy Right by Student Community!</div>
+      <div className="text-light fs-6">Follow Us @Twitter</div>
+      <div className="text-light fs-6"> Follow Us @Youtube</div>
+    </div>
+  );
+}
 export default App;
