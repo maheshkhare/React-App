@@ -22,3 +22,5 @@ function App() {
 }
 
 export default App;
+
+// navigation by using different pages
